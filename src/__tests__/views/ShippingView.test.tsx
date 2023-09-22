@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it } from "vitest";
 
@@ -25,7 +26,7 @@ const ShippingViewWithAtom = () => {
 };
 
 describe("Shipping view", () => {
-  describe("renders properly", () => {
+  describe("renders properly:", () => {
     beforeEach(() => {
       render(<ShippingViewWithAtom />, { wrapper: BrowserRouter });
     });
@@ -38,7 +39,7 @@ describe("Shipping view", () => {
       expect(screen.getByText(TEXTS.shipping.buttonLabel)).toBeInTheDocument();
     });
 
-    it("the button is initially disabled", () => {
+    it("submit button is initially disabled", () => {
       expect(screen.getByText(TEXTS.shipping.buttonLabel)).toBeDisabled();
     });
   });
@@ -63,31 +64,73 @@ describe("Shipping view", () => {
     });
   });
 
-  describe("Form", () => {
-    beforeEach(() => {
+  describe("When form is filled", () => {
+    beforeEach(async () => {
       render(<ShippingViewWithAtom />, { wrapper: BrowserRouter });
+      const user = userEvent.setup();
+
+      // Fill form with valid values (omit Name input only):
+
+      const surnameInput = screen.getByLabelText(TEXTS.shipping.labels.surname) as HTMLInputElement;
+      await user.type(surnameInput, "Doe");
+
+      const phoneNumberInput = screen.getByLabelText(TEXTS.shipping.labels.phoneNumber) as HTMLInputElement;
+      await user.type(phoneNumberInput, "123123123");
+
+      const emailInput = screen.getByLabelText(TEXTS.shipping.labels.email) as HTMLInputElement;
+      await user.type(emailInput, "john.doe@example.com");
+
+      const dateInput = screen.getByLabelText(TEXTS.shipping.labels.dateOfBirth) as HTMLInputElement;
+      await user.type(dateInput, "2023-09-07");
+
+      const addressInput = screen.getByLabelText(TEXTS.shipping.labels.address) as HTMLInputElement;
+      await user.type(addressInput, "10 Unknown Street");
+
+      const cityInput = screen.getByLabelText(TEXTS.shipping.labels.city) as HTMLInputElement;
+      await user.type(cityInput, "Los Angeles");
+
+      const stateInput = screen.getByLabelText(TEXTS.shipping.labels.state) as HTMLInputElement;
+      await user.selectOptions(stateInput, "California");
+
+      const zipCodeInput = screen.getByLabelText(TEXTS.shipping.labels.zipCode) as HTMLInputElement;
+      await user.type(zipCodeInput, "12345");
     });
 
-    // TODO: test validation for all inputs
-    it("name input", () => {
-      render(<ShippingViewWithAtom />, { wrapper: BrowserRouter });
-
-      it("renders properly", () => {
-        expect(screen.getByText(TEXTS.shipping.labels.name)).toBeInTheDocument();
-      });
-
-      it("is validated properly with invalid value", () => {
-        // validation error case
-      });
-
-      it("is validated properly with valid value", () => {
-        // proper value case
-      });
+    it("submit button is disabled when any (for example Name) input is empty", async () => {
+      expect(screen.getByText(TEXTS.shipping.buttonLabel)).toBeDisabled();
     });
 
-    // TODO: fill all inputs and test
-    // it("submit button is enabled when are inputs are valid", () => {
-    //   expect(screen.getByText(TEXTS.selection.buttonLabel)).not.toBeDisabled();
-    // });
+    it("submit button is enabled when all inputs are valid", async () => {
+      const user = userEvent.setup();
+      const nameInput = screen.getByLabelText(TEXTS.shipping.labels.name) as HTMLInputElement;
+      // Fill input name so the whole form is filled
+      await user.type(nameInput, "John");
+
+      expect(screen.getByText(TEXTS.shipping.buttonLabel)).not.toBeDisabled();
+    });
+
+    it("submit button is disabled when phone number is invalid (letters)", async () => {
+      const user = userEvent.setup();
+      const phoneNumberInput = screen.getByLabelText(TEXTS.shipping.labels.phoneNumber) as HTMLInputElement;
+      await user.type(phoneNumberInput, "1q31q31q3");
+
+      expect(screen.getByText(TEXTS.shipping.buttonLabel)).toBeDisabled();
+    });
+
+    it("submit button is disabled when email is in wrong format (no @)", async () => {
+      const user = userEvent.setup();
+      const emailInput = screen.getByLabelText(TEXTS.shipping.labels.email) as HTMLInputElement;
+      await user.type(emailInput, "john.doe#example.com");
+
+      expect(screen.getByText(TEXTS.shipping.buttonLabel)).toBeDisabled();
+    });
+
+    it("submit button is disabled when zip code has wrong format (6 digits)", async () => {
+      const user = userEvent.setup();
+      const zipCodeInput = screen.getByLabelText(TEXTS.shipping.labels.zipCode) as HTMLInputElement;
+      await user.type(zipCodeInput, "123456");
+
+      expect(screen.getByText(TEXTS.shipping.buttonLabel)).toBeDisabled();
+    });
   });
 });
