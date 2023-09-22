@@ -2,6 +2,7 @@ import { TEXTS } from "../constants";
 import { useGetMinifigParts } from "../hooks/useGetMinifigParts";
 import { Minifig } from "../types";
 import { Button } from "./Button";
+import { ImageFallback } from "./ImageFallback";
 import { PartDetails } from "./PartDetails";
 import { Skeleton } from "./Skeleton";
 
@@ -20,7 +21,11 @@ export const Summary = ({ selectedMinifig, onSubmit, isSubmitDisabled }: Summary
     <div className="flex h-full w-full flex-col rounded-2xl bg-white p-6 text-black">
       <h2 className="mb-12 text-3xl font-extrabold uppercase">{TEXTS.shipping.summary}</h2>
       <div className="mb-10 flex flex-col items-center gap-4">
-        <img src={selectedMinifig.set_img_url} width={150} height={150} />
+        {selectedMinifig.set_img_url ? (
+          <img src={selectedMinifig.set_img_url} className="h-36 w-36" />
+        ) : (
+          <ImageFallback className="h-36 w-36" />
+        )}
         <span className="font-medium">{selectedMinifig.name}</span>
       </div>
       <p>{selectedMinifig?.set_num}</p>
