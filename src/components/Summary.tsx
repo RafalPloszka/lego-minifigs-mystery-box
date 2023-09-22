@@ -28,7 +28,6 @@ export const Summary = ({ selectedMinifig, onSubmit, isSubmitDisabled }: Summary
         )}
         <span className="font-medium">{selectedMinifig.name}</span>
       </div>
-      <p>{selectedMinifig?.set_num}</p>
       {error ? <p className="text-sm text-red-400">{TEXTS.shipping.error}</p> : null}
 
       {isLoading ? <Skeleton /> : null}
