@@ -31,7 +31,7 @@ export const Summary = ({ selectedMinifig, onSubmit, isSubmitDisabled }: Summary
       {partsData ? (
         <>
           <p className="font-medium">There are {partsData.length} parts in this minifig:</p>
-          <div data-testid="parts-wrapper" className="overflow-y-scroll">
+          <div data-testid="parts-wrapper" className="overflow-y-auto">
             {partsData.map((part) => (
               <PartDetails
                 key={part.part_num}
