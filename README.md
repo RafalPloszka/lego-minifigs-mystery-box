@@ -6,13 +6,17 @@ This is a simple application that allows users to draw three different LEGO mini
 
 ## Getting Started
 
-First, run the development server:
+
+First run the development server:
 
 ```bash
 npm run dev
 ```
 
 Open [http://127.0.0.1:5173/](http://127.0.0.1:5173/) with your browser to see the result.
+
+In order to to use all app features create `.env file` (look `.example.env`)
+You can get your API key from [https://rebrickable.com/api/](https://rebrickable.com/api/).
 
 ## Tech stack
 
