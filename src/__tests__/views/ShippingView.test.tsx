@@ -1,8 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { Atom, Provider } from "jotai";
-import { useHydrateAtoms } from "jotai/utils";
-import { PropsWithChildren } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it } from "vitest";
 
@@ -10,6 +6,7 @@ import { TEXTS } from "../../constants";
 import { selectedMinifigAtom } from "../../store";
 import { Minifig } from "../../types";
 import ShippingView from "../../views/ShippingView";
+import { SelectedMinifigProvider } from "../utils";
 
 const mockedMinifig: Minifig = {
   set_num: "fig-006091",
@@ -18,21 +15,6 @@ const mockedMinifig: Minifig = {
   set_img_url: "https://cdn.rebrickable.com/media/sets/fig-006091/60397.jpg",
   set_url: "https://rebrickable.com/minifigs/fig-006091/ginny-…in-gryffindor-sweater-with-crest-cape-with-stars/",
 };
-
-interface Props<T> extends PropsWithChildren {
-  initialValues: [Atom<T>, T][];
-}
-
-const HydrateAtoms = ({ initialValues, children }: Props<Minifig | null>) => {
-  useHydrateAtoms(initialValues);
-  return children;
-};
-
-const SelectedMinifigProvider = ({ initialValues, children }: Props<Minifig | null>) => (
-  <Provider>
-    <HydrateAtoms initialValues={initialValues}>{children}</HydrateAtoms>
-  </Provider>
-);
 
 const ShippingViewWithAtom = () => {
   return (
