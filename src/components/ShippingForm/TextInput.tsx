@@ -17,6 +17,7 @@ export const TextInput = ({ id, label, register, error, className: styles }: Tex
     </label>
     <input
       id={id}
+      defaultValue=""
       className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pt-2 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
       {...register}
     />
