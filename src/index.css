@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply h-full;
+}
+body {
+  @apply h-full;
+}
+div#root {
+  @apply h-full;
+}
+
+@layer base {
+  body {
+    @apply bg-blue-950 text-white;
+  }
+}
