@@ -11,10 +11,10 @@ import { drawnMinifigsAtom } from "../store";
 
 function HomeView() {
   const navigate = useNavigate();
-  const [drawnMinifigs, setDrawnMinifigs] = useAtom(drawnMinifigsAtom);
+  const [_drawnMinifigs, setDrawnMinifigs] = useAtom(drawnMinifigsAtom);
   const [shouldFetch, setShouldFetch] = useState(false);
   const { data, isLoading, error } = useGetMiniFigs(shouldFetch);
-  console.log(drawnMinifigs);
+
   useEffect(() => {
     if (data?.results) {
       const drawn = sampleSize(data.results, 3);
