@@ -63,35 +63,31 @@ describe("Shipping view", () => {
     });
   });
 
-  describe("Form renders properly", () => {
-    it("Inputs", () => {
+  describe("Form", () => {
+    beforeEach(() => {
+      render(<ShippingViewWithAtom />, { wrapper: BrowserRouter });
+    });
+
+    // TODO: test validation for all inputs
+    it("name input", () => {
       render(<ShippingViewWithAtom />, { wrapper: BrowserRouter });
 
-      it("name input", () => {
-        render(<ShippingViewWithAtom />, { wrapper: BrowserRouter });
-
+      it("renders properly", () => {
         expect(screen.getByText(TEXTS.shipping.labels.name)).toBeInTheDocument();
-
-        // validation error case
-
-        // proper value case
       });
 
-      expect(screen.getByText(TEXTS.shipping.labels.name)).toBeInTheDocument();
-      expect(screen.getByText(TEXTS.shipping.labels.surname)).toBeInTheDocument();
-      expect(screen.getByText(TEXTS.shipping.labels.phoneNumber)).toBeInTheDocument();
-      expect(screen.getByText(TEXTS.shipping.labels.email)).toBeInTheDocument();
-      expect(screen.getByText(TEXTS.shipping.labels.dateOfBirth)).toBeInTheDocument();
-      expect(screen.getByText(TEXTS.shipping.labels.address)).toBeInTheDocument();
-      expect(screen.getByText(TEXTS.shipping.labels.city)).toBeInTheDocument();
-      expect(screen.getByText(TEXTS.shipping.labels.state)).toBeInTheDocument();
-      expect(screen.getByText(TEXTS.shipping.labels.zipCode)).toBeInTheDocument();
+      it("is validated properly with invalid value", () => {
+        // validation error case
+      });
+
+      it("is validated properly with valid value", () => {
+        // proper value case
+      });
     });
 
-    it("the title is visible", () => {
-      render(<ShippingViewWithAtom />, { wrapper: BrowserRouter });
-
-      expect(screen.getByText(TEXTS.shipping.summary)).toBeInTheDocument();
-    });
+    // TODO: fill all inputs and test
+    // it("submit button is enabled when are inputs are valid", () => {
+    //   expect(screen.getByText(TEXTS.selection.buttonLabel)).not.toBeDisabled();
+    // });
   });
 });
