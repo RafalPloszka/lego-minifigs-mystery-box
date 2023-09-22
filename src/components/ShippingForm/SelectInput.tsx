@@ -13,7 +13,7 @@ interface SelectInputProps {
 
 export const SelectInput = ({ id, label, options, register, error, className: styles }: SelectInputProps) => (
   <div className={`mb-6 ${styles}`}>
-    <label htmlFor="countries" className="mb-2 block text-sm font-medium">
+    <label htmlFor={id} className="mb-2 block text-sm font-medium">
       {label}
     </label>
     <select
