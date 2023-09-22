@@ -1,27 +1,19 @@
-# React + TypeScript + Vite
+# Lego minifigs mystery box
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Brief description
 
-Currently, two official plugins are available:
+This is a simple application that allows users to draw three different LEGO mini figures (commonly referred to as a minifigs) from the Harry Potter series and get one of them free of charge. The first step contains a button that initiates the drawing. After successfully drawing three random minifigs, the user can choose one of the three random figures on the next screen. The last step contains the summary and shipping details form.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
 
-## Expanding the ESLint configuration
+First, run the development server:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Open [http://127.0.0.1:5173/](http://127.0.0.1:5173/) with your browser to see the result.
+
+## Tech stack
+
+typescript, react, vite, swr, tailwind, jotai, vitest, react-testing-library, react-hook-form, zod
